@@ -1,0 +1,15 @@
+{
+    "name": "48697/php-my-mvc-framework",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "Jan",
+            "email": "jan.madon@gmail.com"
+        }
+    ],
+    "require": {}
+}
