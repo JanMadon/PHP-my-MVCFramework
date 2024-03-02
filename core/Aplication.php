@@ -5,17 +5,19 @@ namespace app\core;
 class Aplication
 {
 
+    public static string $ROOT_DIR;
     public Router $router;
     public Request $request;
 
-    public function __construct()
+    public function __construct(string $rootPatch)
     {
+        self::$ROOT_DIR = $rootPatch;
         $this->request = new Request();
         $this->router = new Router($this->request);
     }
 
     public function run()
     {
-        $this->router->resolve();
+        echo $this->router->resolve();
     }
 }
