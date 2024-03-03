@@ -29,7 +29,12 @@
         </div>
     </div>
 </nav>
-{{content}}
+
+<div class="container">
+    {{content}}
+
+</div>
+
 
 </body>
 

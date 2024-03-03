@@ -14,6 +14,7 @@
 //exit;
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use app\controllers\SiteController;
 use app\core\Aplication;
 
 $app = new Aplication(dirname(__DIR__));
@@ -28,8 +29,11 @@ $app->router->get('/users', function(){
 $app->router->get('/books', function(){
     return 'hello world books';
 });
-$app->router->get('/home', 'home');
-$app->router->get('/contact', 'contact');
+$app->router->get('/home', [SiteController::class, 'home']);
+$app->router->get('/contact', [SiteController::class, 'contact']);
+$app->router->post('/contact', [SiteController::class, 'handleContact']);
+
+
 
 $app->run();
 
