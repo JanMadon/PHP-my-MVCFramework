@@ -2,13 +2,15 @@
 
 namespace app\core;
 
-class Model
+abstract class Model
 {
     public const RULE_REQUIRED = 'required';
     public const RULE_EMAIL = 'email';
     public const RULE_MIN = 'min';
     public const RULE_MAX = 'max';
     public const RULE_MATCH = 'match';
+
+    public array $errors = [];
 
     public function loadData($data): void
     {
@@ -17,17 +19,15 @@ class Model
                 $this->{$key} = $value;
             }
         }
-
-
     }
 
     abstract public function rules(): array;
 
-    public array $errors = [];
     public function validate()
     {
         foreach ($this->rules() as $attribute => $rules) {
-            $value = $this->{$attribute};
+            $value = $this->{$attribute}; // to jest równoznaczne z $this->$attribute; te nawisay klamerowę są estetyczne
+
             foreach ($rules as $rule) {
                 $ruleName = $rule;
                 if (!is_string($rule)) {
@@ -43,26 +43,27 @@ class Model
                     $this->addError($attribute, self::RULE_MIN, $rule);
                 }
                 if ($ruleName === self::RULE_MAX && strlen($value) > $rule['max']) {
+
                     $this->addError($attribute, self::RULE_MAX, $rule);
                 }
                 if ($ruleName === self::RULE_MATCH && $value !== $this->{$rule['match']}) {
-                    $this->addError($attribute, self::RULE_MAX, $rule);
+                    $this->addError($attribute, self::RULE_MATCH, $rule);
                 }
             }
         };
-
         return empty($this->errors);
     }
+
     private function addError(string $attribute, string $rule, $params = []): void
     {
         $message = $this->errorMessages()[$rule] ?? '';
-        foreach ($params as $key => $value){
+        foreach ($params as $key => $value) {
             $message = str_replace("{{$key}}", $value, $message);
         }
         $this->errors[$attribute][] = $message;
-
     }
-    public function errorMessages()
+
+    public function errorMessages(): array
     {
         return [
             self::RULE_REQUIRED => 'This field is required',
@@ -78,7 +79,7 @@ class Model
         return $this->errors[$attribute] ?? false;
     }
 
-    public function getfirstError($attribute)
+    public function getFirstError($attribute)
     {
         return $this->errors[$attribute][0] ?? false;
     }

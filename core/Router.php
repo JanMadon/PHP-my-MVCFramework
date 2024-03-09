@@ -43,12 +43,14 @@ class Router
             exit;
         }
 
+//                var_dump($callback);
+//        exit();
+
         if(!is_object($callback[0])){
             Aplication::$app->controller = new $callback[0]();
             $callback[0] = Aplication::$app->controller;
         }
-//        var_dump($callback);
-//        exit();
+
 
         return call_user_func($callback, $this->request);
         //return $callback();

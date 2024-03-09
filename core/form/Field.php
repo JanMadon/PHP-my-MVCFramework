@@ -31,6 +31,7 @@ class Field
             <div class="form_group">
                 <label>%s</label>
                 <input type="%s" name="%s" value="%s" class="form-control%s">
+                <div class="invalid-feedback"> %s </div>
             </div>
         ',
             $this->attribute,
@@ -38,7 +39,7 @@ class Field
             $this->attribute,
             $this->model->{$this->attribute},
             $this->model->hasError($this->attribute) ? ' is-invalid' : '',
-            $this->model->getfirstError($this->attribute)
+            $this->model->getFirstError($this->attribute)
         );
     }
 

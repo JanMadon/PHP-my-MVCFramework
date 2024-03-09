@@ -10,26 +10,42 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 <?php \app\core\form\Form::end() ?>
 
-
-<form action="" method="post">
-    <div class="row">
-        <div class="col">
-            <div class="form-group">
-                <label class="form-label">Firstname</label>
-                <input type="text" name="firstnam" value="<?php echo $model->firstname ?>"
-                       class="form-control<?php echo $model->hasError('firstname') ? 'is-invalid' : '' ?>">
-                <div class="invalid-feedback">
-                    <?php echo $model->getfirstError('firstname') ?>
-                </div>
-
-            </div>
-            <div class="col">
-                <label class="form-label">LastName</label>
-                <input type="text" name="lastname">
-            </div>
-        </div>
-
-    </div>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<!--<form action="" method="post">-->
+<!--    <div class="row">-->
+<!--        <div class="col">-->
+<!--            <div class="form-group">-->
+<!--                <label class="form-label">Firstname</label>-->
+<!--                <input type="text" name="firstname" value="--><?php //echo $model->firstname ?><!--"-->
+<!--                       class="form-control --><?php //echo $model->hasError('firstname') ? 'is-invalid' : '' ?><!--"/>-->
+<!--                <div class="invalid-feedback"> --><?php //echo $model->getFirstError('firstname') ?><!-- </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="form-label">Lastname</label>-->
+<!--                <input type="text" name="lastname"-->
+<!--                       class="form-control"/>-->
+<!--                <div class="invalid-feedback"> </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="form-label">Email</label>-->
+<!--                <input type="text" name="email"-->
+<!--                       class="form-control"/>-->
+<!--                <div class="invalid-feedback"> </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="form-label">Password</label>-->
+<!--                <input type="text" name="password"-->
+<!--                       class="form-control"/>-->
+<!--                <div class="invalid-feedback"> </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="form-label">confirmPassword</label>-->
+<!--                <input type="text" name="confirmPassword"-->
+<!--                       class="form-control"/>-->
+<!--                <div class="invalid-feedback"> </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!---->
+<!--    </div>-->
+<!---->
+<!--    <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--</form>-->

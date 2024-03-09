@@ -12,6 +12,7 @@
 
 //echo __DIR__.'/vendor/autoload.php';
 //exit;
+require_once  __DIR__ . '/../Utils/debug.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use app\controllers\AuthController;
