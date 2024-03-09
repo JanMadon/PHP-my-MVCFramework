@@ -1,22 +1,51 @@
-<h1>Contact us</h1>
+<h1>Create an account</h1>
 
-<form action="/register" method="post">
-    <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
-        <input type="text" class="form-control" id="name" name="subject">
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" name="email">
-    </div>
-    <div class="mb-3">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" name="password">
-    </div>
-    <div class="mb-3">
-        <label for="confirmPassword" class="form-label">Confirm Password</label>
-        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
-    </div>
+<?php $form = \app\core\form\Form::begin('', 'post') ?>
+    <?php echo $form->field($model, 'firstname') ?>
+    <?php echo $form->field($model, 'lastname') ?>
+    <?php echo $form->field($model, 'email') ?>
+    <?php echo $form->field($model, 'password')->passwordField() ?>
+    <?php echo $form->field($model, 'confirmPassword')->passwordField() ?>
 
     <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<?php \app\core\form\Form::end() ?>
+
+<!--<form action="" method="post">-->
+<!--    <div class="row">-->
+<!--        <div class="col">-->
+<!--            <div class="form-group">-->
+<!--                <label class="form-label">Firstname</label>-->
+<!--                <input type="text" name="firstname" value="--><?php //echo $model->firstname ?><!--"-->
+<!--                       class="form-control --><?php //echo $model->hasError('firstname') ? 'is-invalid' : '' ?><!--"/>-->
+<!--                <div class="invalid-feedback"> --><?php //echo $model->getFirstError('firstname') ?><!-- </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="form-label">Lastname</label>-->
+<!--                <input type="text" name="lastname"-->
+<!--                       class="form-control"/>-->
+<!--                <div class="invalid-feedback"> </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="form-label">Email</label>-->
+<!--                <input type="text" name="email"-->
+<!--                       class="form-control"/>-->
+<!--                <div class="invalid-feedback"> </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="form-label">Password</label>-->
+<!--                <input type="text" name="password"-->
+<!--                       class="form-control"/>-->
+<!--                <div class="invalid-feedback"> </div>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label class="form-label">confirmPassword</label>-->
+<!--                <input type="text" name="confirmPassword"-->
+<!--                       class="form-control"/>-->
+<!--                <div class="invalid-feedback"> </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!---->
+<!--    </div>-->
+<!---->
+<!--    <button type="submit" class="btn btn-primary">Submit</button>-->
+<!--</form>-->
