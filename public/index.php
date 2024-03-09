@@ -1,28 +1,26 @@
 <?php
 
-//echo 'test';
-//ob_start();
-//
-//$var = ob_get_clean();
-//echo 'test po ob_clean';
-//echo '<br>';
-//echo $var;
-//
-//exit;
-
-//echo __DIR__.'/vendor/autoload.php';
-//exit;
-require_once  __DIR__ . '/../Utils/debug.php';
-require_once __DIR__ . '/../vendor/autoload.php';
-
+use app\core\Aplication;
 use app\controllers\AuthController;
 use app\controllers\SiteController;
-use app\core\Aplication;
 
-$app = new Aplication(dirname(__DIR__));
+require_once  __DIR__ . '/../Utils/debug.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
 
-//$router = new Router();
-$app->router->get('/', function(){
+
+$config = [
+  'db' => [
+    'dns' =>$_ENV['DB_DSN'],
+    'user' =>$_ENV['DB_USER'],
+    'password' =>$_ENV['DB_PASSWORD'],
+  ],
+];
+
+$app = new Aplication(dirname(__DIR__), $config);
+
+$app->router->get('/', function(){ // closure wywala błąd
     return 'hello world /';
 });
 $app->router->get('/users', function(){
