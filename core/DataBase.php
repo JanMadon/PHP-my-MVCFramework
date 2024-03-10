@@ -22,20 +22,29 @@ class DataBase
         $this->createMigrationsTable();
         $appliedMigrations = $this->getAppliedMigrations();
 
-        $files = scandir(Aplication::$ROOT_DIR.'/migrations');
+        $files = scandir(Aplication::$ROOT_DIR . '/migrations');
         $toApplyMigrations = array_diff($files, $appliedMigrations);
-        foreach ($toApplyMigrations as $migration){
-            if ($migration === '.' || $migration === '..' ){
+        foreach ($toApplyMigrations as $migration) {
+            if ($migration === '.' || $migration === '..') {
                 continue;
             }
 
-            require_once Aplication::$ROOT_DIR.'/migrations/'.$migration;
+            require_once Aplication::$ROOT_DIR . '/migrations/' . $migration;
             $className = pathinfo($migration, PATHINFO_FILENAME);
-            var_dump($className);
+            $instance = new $className();
+            $this->log("applaying migration  $className");
+            $instance->up();
+            $this->log("applaied migration  $className");
+            $newMigrations[] = $migration;
+        }
+
+        if (!empty($newMigrations)) {
+            $this->saveMigrations($newMigrations);
+        } else {
+            $this->log('All migrations are applied');
         }
 
 
-        exit();
     }
 
     public function createMigrationsTable(): void
@@ -54,4 +63,17 @@ class DataBase
 
         return $statement->fetchAll(\PDO::FETCH_COLUMN);
     }
+
+    private function saveMigrations(array $migrations)
+    {
+        $str = implode(',', array_map(fn($migration) => "('$migration')", $migrations));
+        $stm = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES $str");
+        $stm->execute();
+    }
+
+    protected function log($message)
+    {
+        echo '[' . date('Y-m-d H:i:s' . ']-') . $message . PHP_EOL;
+    }
+
 }
