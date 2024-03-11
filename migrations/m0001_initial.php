@@ -4,7 +4,7 @@ use app\core\Aplication;
 
 class m0001_initial
 {
-    public function up()
+    public function up( )
     {
         $db = Aplication::$app->db;
         $query = "CREATE TABLE users (

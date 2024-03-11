@@ -5,7 +5,7 @@ namespace app\core;
 class DataBase
 {
 
-    public \PDO $pdo;
+    public \PDO $pdo ;
 
     public function __construct(array $config)
     {
@@ -14,14 +14,13 @@ class DataBase
         $password = $config['password'] ?? '';
 
         $this->pdo = new \PDO($dns, $user, $password);
-        $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+        $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); // to sobie ogarnij
     }
 
     public function applyMigrations(): void
     {
         $this->createMigrationsTable();
         $appliedMigrations = $this->getAppliedMigrations();
-
         $files = scandir(Aplication::$ROOT_DIR . '/migrations');
         $toApplyMigrations = array_diff($files, $appliedMigrations);
         foreach ($toApplyMigrations as $migration) {
@@ -30,11 +29,11 @@ class DataBase
             }
 
             require_once Aplication::$ROOT_DIR . '/migrations/' . $migration;
-            $className = pathinfo($migration, PATHINFO_FILENAME);
+            $className = pathinfo($migration, PATHINFO_FILENAME); // usunie rozszeżenie z nazwy pliku test.php => test
             $instance = new $className();
-            $this->log("applaying migration  $className");
+            $this->log("applaying migration $className");
             $instance->up();
-            $this->log("applaied migration  $className");
+            $this->log("applaied migration $className");
             $newMigrations[] = $migration;
         }
 
@@ -56,15 +55,14 @@ class DataBase
                     ) ENGINE=InnoDB;");
     }
 
-    private function getAppliedMigrations()
+    private function getAppliedMigrations(): false|array
     {
         $statement = $this->pdo->prepare("SELECT migration FROM migrations");
         $statement->execute();
-
         return $statement->fetchAll(\PDO::FETCH_COLUMN);
     }
 
-    private function saveMigrations(array $migrations)
+    private function saveMigrations(array $migrations): void
     {
         $str = implode(',', array_map(fn($migration) => "('$migration')", $migrations));
         $stm = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES $str");
