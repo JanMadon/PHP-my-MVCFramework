@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\core\Aplication;
 use app\core\Controller;
 use app\core\Request;
 use app\models\User;
@@ -22,15 +23,16 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         // dd($request->getBody());
-        $registerModel = new User();
+        $user = new User();
         if ($request->isPost()) {
-            $registerModel->loadData($request->getBody());
-            if($registerModel->validate() && $registerModel->register()) {
-                return "Success";
+            $user->loadData($request->getBody());
+            if($user->validate() && $user->save()) {
+                Aplication::$app->session->setFlash('success', 'Thanks for registration');
+                Aplication::$app->response->redirect('/');
                 // to jeśli przejdzie validacje // przekirowanie
             }
             return $this->render('register', [
-                'model' =>$registerModel
+                'model' =>$user
             ]);
 
 
@@ -38,7 +40,7 @@ class AuthController extends Controller
         }
 
         $this->setLayout('auth');
-        return $this->render('register', ['model' => $registerModel]);
+        return $this->render('register', ['model' => $user]);
     }
 
 }

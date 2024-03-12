@@ -69,6 +69,11 @@ class DataBase
         $stm->execute();
     }
 
+    public function prepare($sql): false|\PDOStatement
+    {
+        return $this->pdo->prepare($sql);
+    }
+
     protected function log($message)
     {
         echo '[' . date('Y-m-d H:i:s' . ']-') . $message . PHP_EOL;
