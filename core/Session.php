@@ -17,14 +17,14 @@ class Session
 
         $_SESSION[self::FLASH_KEY] = $flashMessages;
 
-        dd($_SESSION[self::FLASH_KEY]);
+        //dd($_SESSION[self::FLASH_KEY]);
         //exit();
     }
 
-    public function setFlash($key, $message)
+    public function setFlash($key, $message): void
     {
         $_SESSION[self::FLASH_KEY][$key] = [
-            'removed' => false,
+            'remove' => false,
             'value' => $message,
         ];
     }
@@ -39,10 +39,11 @@ class Session
         $flashMessages = $_SESSION[self::FLASH_KEY] ?? [];
         foreach ($flashMessages as $key => &$flashMessage) {
             if ($flashMessage['remove']) {
-                unset($flashMessages[$key]);
+                unset($_SESSION[self::FLASH_KEY][$key]); //sprawdz jak działa ten unset <-dlaczego tam się ni
+                //dd($flashMessages[$key]); // a u typa dziąło
             }; // coś tu jest nie tak :((
         }
-        dd($_SESSION[self::FLASH_KEY]);
+        //dd($_SESSION[self::FLASH_KEY]);
 
     }
 

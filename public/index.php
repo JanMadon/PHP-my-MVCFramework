@@ -20,15 +20,17 @@ $config = [
 
 $app = new Aplication(dirname(__DIR__), $config);
 
-$app->router->get('/', function(){ // closure wywala błąd
-    return 'hello world /';
-});
+//$app->router->get('/', function(){ // closure wywala błąd
+//    return 'hello world /';
+//});
 $app->router->get('/users', function(){
     return 'hello world users';
 });
 $app->router->get('/books', function(){
     return 'hello world books';
 });
+
+$app->router->get('/', [SiteController::class, 'home']);
 $app->router->get('/home', [SiteController::class, 'home']);
 $app->router->get('/contact', [SiteController::class, 'contact']);
 $app->router->post('/contact', [SiteController::class, 'handleContact']);
