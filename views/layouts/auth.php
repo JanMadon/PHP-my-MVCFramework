@@ -6,7 +6,7 @@
     <title>Bootstrap demo</title>
 </head>
 <body>
-sorry
+
 <div class="container">
     {{content}}
 

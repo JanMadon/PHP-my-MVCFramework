@@ -18,9 +18,14 @@ class User extends DbModel
     public string $password = '';
     public string $confirmPassword = '';
 
-    public function tableName(): string
+    static public function tableName(): string
     {
         return 'users';
+    }
+
+    static public function primaryKey(): string
+    {
+        return 'id';
     }
 
     public function save(): true

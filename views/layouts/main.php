@@ -1,7 +1,9 @@
 <?php
 
 use app\core\Aplication;
-
+//
+dd(Aplication::$app->user->id);
+//dd($_SESSION);
 ?>
 
 
