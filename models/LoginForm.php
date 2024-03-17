@@ -30,11 +30,8 @@ class LoginForm extends Model
             $this->addError('password', 'Password is incorrect');
             return false;
         }
-        dd($user);
-
 
         return Aplication::$app->login($user);
-
     }
 
     public function labels(): array

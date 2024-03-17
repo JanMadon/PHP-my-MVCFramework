@@ -1,9 +1,7 @@
 <?php
 
 use app\core\Aplication;
-//
-dd(Aplication::$app->user->id);
-//dd($_SESSION);
+
 ?>
 
 
@@ -32,6 +30,7 @@ dd(Aplication::$app->user->id);
                 </li>
 
             </ul>
+            <?php if (Aplication::isGuest()): ?>
             <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/login">Login</a>
@@ -39,8 +38,19 @@ dd(Aplication::$app->user->id);
                 <li class="nav-item">
                     <a class="nav-link" href="/register">Register</a>
                 </li>
-
             </ul>
+            <?php else:  ?>
+                <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/logout">
+                            Welcone <?php echo Aplication::$app->user->getDisplayName()?>
+                            (Logout)
+                        </a>
+                    </li>
+                </ul>
+            <?php endif  ?>
+
+
 
         </div>
     </div>
