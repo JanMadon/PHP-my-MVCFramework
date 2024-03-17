@@ -37,8 +37,11 @@ class Aplication
         } else {
             $this->user = null;
         }
-        dd('stop constructoe');
+    }
 
+    public static function isGuest()
+    {
+        return !self::$app->user;
     }
 
     public function run()
@@ -58,11 +61,11 @@ class Aplication
 
     public function login(DbModel $user)
     {
-        dd('login');
         $this->user = $user;
         $primaryKey = $user->primaryKey();
         $primaryValue = $user->{$primaryKey};
         $this->session->set('user', $primaryValue);
+        return true;
     }
 
     public function logout()
@@ -70,4 +73,6 @@ class Aplication
         $this->user = null;
         $this->session->remove('user');
     }
+
+
 }

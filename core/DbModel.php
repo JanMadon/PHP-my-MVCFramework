@@ -51,4 +51,5 @@ abstract class DbModel extends Model
         return Aplication::$app->db->pdo->prepare($sql);
     }
 
+
 }
