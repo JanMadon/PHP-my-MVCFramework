@@ -2,6 +2,7 @@
 
 namespace app\core;
 
+use app\core\exception\NotFoundException;
 use JetBrains\PhpStorm\NoReturn;
 
 class Router
@@ -32,24 +33,30 @@ class Router
         $path = $this->request->getPath();
         $method = $this->request->method();
         $callback = $this->routes[$method][$path] ?? false;
-        if (!$callback) {
-            $this->response->setStatusCode(404);
-            $this->renderView('error404');
-            exit();
+        if ($callback === false) {
+            throw new NotFoundException();
         }
 
         if (is_string($callback)) {
             $this->renderView($callback);
-            exit();
+
         }
 
-        if(!is_object($callback)){
-            Aplication::$app->controller = new $callback[0]();
-            $callback[0] = Aplication::$app->controller;
+        if (!is_object($callback)) {
+
+            /** @var Controller $controller */
+            $controller = new $callback[0]();
+            Aplication::$app->controller = $controller;
+            $controller->action = $callback[1];
+
+            foreach ($controller->getMiddlewares() as $middleware) {
+                $middleware->execute();
+            }
+            $callback[0] = $controller;
+
         }
 
         return call_user_func($callback, $this->request, $this->response);
-        //return $callback();
     }
 
     #[NoReturn] public function renderView(string $callback, array $params = []): void
@@ -72,7 +79,7 @@ class Router
 
     private function layoutContent(): string
     {
-        $layout = Aplication::$app->controller->layout ?? 'auth';
+        $layout = Aplication::$app->controller->layout ?? 'main';
         ob_start();
         include_once Aplication::$ROOT_DIR . "/views/layouts/$layout.php";
         return ob_get_clean();
@@ -80,7 +87,7 @@ class Router
 
     private function pageContent($pageName, $params): bool|string
     {
-        foreach($params as $key => $value){
+        foreach ($params as $key => $value) {
             $$key = $value;
         }
 

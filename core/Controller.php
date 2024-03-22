@@ -2,11 +2,17 @@
 
 namespace app\core;
 
+use app\core\middlewares\BaseMiddleware;
 use JetBrains\PhpStorm\NoReturn;
 
 class Controller
 {
     public string $layout = 'main';
+    public string $action = '';
+    /**
+     * @var BaseMiddleware[];
+     */
+    protected array $middlewares = [];
 
     public function setLayout($layout)
     {
@@ -18,13 +24,26 @@ class Controller
         return Aplication::$app->router->renderView($view, $param);
     }
 
-    public function request(Request $request){
+    public function request(Request $request)
+    {
 
-        if($request->isPost()){
+        if ($request->isPost()) {
             return 'handle submitted data';
         }
 
         return Aplication::$app->request->getBody();
     }
+
+    public function registerMiddleware(BaseMiddleware $middleware)
+    {
+        $this->middlewares[] = $middleware;
+    }
+
+    public function getMiddlewares(): array
+    {
+        return $this->middlewares;
+    }
+
+
 
 }
