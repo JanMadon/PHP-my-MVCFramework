@@ -32,6 +32,7 @@ class Aplication
 
         $primaryValue = $this->session->get('user');
         if ($primaryValue){
+            //todo jeśli user zostanie skasowany a cooke zostanie w przeglądarce to wali błędem
             $primaryKey = $this->userClass::primaryKey();
             $this->user = $this->userClass::findOne([$primaryKey => $primaryValue]);
         } else {
@@ -49,7 +50,8 @@ class Aplication
         try {
             echo $this->router->resolve();
         } catch (\Exception $e){
-            $this->response->setStatusCode($e->getCode());
+            echo $e->getCode();
+            //$this->response->setStatusCode($e->getCode());
             echo $this->router->renderView('_error', ['exception' => $e]);
 
         }
