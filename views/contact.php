@@ -1,22 +1,15 @@
 <?php
+/** @var $model \app\models\ContactForm */
+
 $this->title = 'Contact';
 ?>
 
 <h1>Contact us</h1>
 
-<form action="/contact" method="post">
-    <div class="mb-3">
-        <label for="subject" class="form-label">Subject</label>
-        <input type="text" class="form-control" id="subject" name="subject">
-    </div>
-    <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="text" class="form-control" id="email" name="email">
-    </div>
-    <div class="mb-3">
-        <label for="body" class="form-label">Body</label>
-        <textarea class="form-control" id="body" name="body"></textarea>
-    </div>
+<?php $form = \app\core\form\Form::begin('', 'post') ?>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+<?php echo $form->field($model, 'subject') ?>
+<?php echo $form->field($model, 'email') ?>
+<?php echo $form->field($model, 'body') ?>
+<button type="submit" class="btn btn-primary">Submit</button>
+<?php echo \app\core\form\Form::end() ?>
