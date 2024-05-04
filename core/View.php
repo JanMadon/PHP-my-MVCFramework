@@ -6,13 +6,13 @@ use JetBrains\PhpStorm\NoReturn;
 
 class View
 {
-    public string $title = 'something';
+    public string $title = '';
 
     #[NoReturn] public function renderView(string $callback, array $params = []): void
     {
 
-        $layoutContent = $this->layoutContent();
         $pageContent = $this->pageContent($callback, $params);
+        $layoutContent = $this->layoutContent();
         $view = str_replace('{{content}}', $pageContent, $layoutContent);
         echo $view;
         exit;

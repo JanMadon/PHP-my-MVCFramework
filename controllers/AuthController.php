@@ -64,6 +64,7 @@ class AuthController extends Controller
 
     public function profile()
     {
+        Aplication::$app->view->title;
         return $this->render('profile');
     }
 

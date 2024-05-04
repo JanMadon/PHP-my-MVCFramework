@@ -1,6 +1,7 @@
 <?php
 /** @var $model \app\models\User */
 
+$this->title = 'Register';
 ?>
 
 
