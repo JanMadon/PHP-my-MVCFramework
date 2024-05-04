@@ -12,9 +12,10 @@ $dotenv->load();
 
 
 $config = [
+    'user' => \app\models\User::class,
     'db' => [
         'dns' =>$_ENV['DB_DSN'],
-        'user' =>$_ENV['DB_USER'],
+        'user' =>$_ENV['DB_USER'], // mvc_framework
         'password' =>$_ENV['DB_PASSWORD'],
     ],
 ];
