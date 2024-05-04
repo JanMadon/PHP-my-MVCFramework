@@ -17,6 +17,8 @@ class Aplication
     public Session $session;
     public Controller $controller;
     public ?DbModel $user;
+    public View $view;
+
 
     public function __construct(string $rootPatch, array $config)
     {
@@ -27,6 +29,7 @@ class Aplication
         $this->response = new Response();
         $this->session = new Session();
         $this->router = new Router($this->request, $this->response);
+        $this->view = new View();
 
         $this->db = new DataBase($config['db']);
 
@@ -52,7 +55,7 @@ class Aplication
         } catch (\Exception $e){
             echo $e->getCode();
             //$this->response->setStatusCode($e->getCode());
-            echo $this->router->renderView('_error', ['exception' => $e]);
+            echo $this->view->renderView('_error', ['exception' => $e]);
 
         }
     }

@@ -1,3 +1,4 @@
+<!--view jest includowany w Router class wiec "this" wskarze na klase Router -->
 <?php
 
 use app\core\Aplication;
@@ -10,7 +11,7 @@ use app\core\Aplication;
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
+    <title><?php echo $this->title?></title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
