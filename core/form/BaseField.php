@@ -21,7 +21,7 @@ abstract class BaseField
     }
     abstract public function renderInput(): string;
 
-    public function __toString()
+    public function __toString() // megic method -> jest automatycznie wywoływana, gdy obiekt jest używany w kontekście, gdzie oczekiwany jest string
     {
         return sprintf('
             <div class="form_group">
