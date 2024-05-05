@@ -19,7 +19,7 @@ abstract class Model
     {
         foreach ($data as $key => $value) {
             if (property_exists($this, $key)) { // pod this jest User , no a lucz to klucz z tablicy request
-                $this->{$key} = $value; // tu chyba nie jest koniecze te {}
+                $this->{$key} = trim($value); // tu chyba nie jest koniecze te {}
             }
         }
     }

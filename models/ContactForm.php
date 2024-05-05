@@ -14,9 +14,9 @@ class ContactForm extends Model
     public function rules(): array
     {
         return [
-          'subject' => [self::RULE_REQUIRED],
-          'email' => [self::RULE_REQUIRED],
-          'body' => [self::RULE_REQUIRED],
+            'subject' => [self::RULE_REQUIRED],
+            'email' => [self::RULE_REQUIRED],
+            'body' => [self::RULE_REQUIRED],
         ];
     }
 
