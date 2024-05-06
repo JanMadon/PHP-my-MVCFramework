@@ -10,6 +10,8 @@ class User extends UserModel
     const STATUS_ACTIVE = 1;
     const STATUS_DELETED = 2;
 
+    public int $id; // te 2 właściwosci potrzebne są aby nie było warminga DbModel
+    public string $created_at;
     public string $firstname = '';
     public string $lastname = '';
     public string $email = '';
