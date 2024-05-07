@@ -2,10 +2,10 @@
 
 namespace app\controllers;
 
-use app\core\Aplication;
-use app\core\Controller;
-use app\core\Request;
-use app\core\Response;
+use janm\phpmvc\Aplication;
+use janm\phpmvc\Controller;
+use janm\phpmvc\Request;
+use janm\phpmvc\Response;
 use app\models\ContactForm;
 
 class SiteController extends Controller

@@ -1,6 +1,6 @@
 <?php
 
-use app\core\Aplication;
+use janm\phpmvc\Aplication;
 
 class m0001_initial
 {

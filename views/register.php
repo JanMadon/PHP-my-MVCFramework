@@ -7,7 +7,7 @@ $this->title = 'Register';
 
 <h1>Create an account</h1>
 
-<?php $form = \app\core\form\Form::begin('', 'post') ?>
+<?php $form = \janm\phpmvc\form\Form::begin('', 'post') ?>
     <?php echo $form->input($model, 'firstname') ?>
     <?php echo $form->input($model, 'lastname') ?>
     <?php echo $form->input($model, 'email') ?>
@@ -15,7 +15,7 @@ $this->title = 'Register';
     <?php echo $form->input($model, 'confirmPassword')->passwordField() ?>
 
     <button type="submit" class="btn btn-primary">Submit</button>
-<?php \app\core\form\Form::end() ?>
+<?php \janm\phpmvc\form\Form::end() ?>
 
 <!--<form action="" method="post">-->
 <!--    <div class="row">-->

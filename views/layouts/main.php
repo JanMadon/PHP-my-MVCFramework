@@ -1,7 +1,7 @@
 <!--view jest includowany w Router class wiec "this" wskarze na klase Router -->
 <?php
 
-use app\core\Aplication;
+use janm\phpmvc\Aplication;
 
 ?>
 

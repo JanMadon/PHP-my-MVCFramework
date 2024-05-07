@@ -1,6 +1,6 @@
 <?php
 
-use app\core\Aplication;
+use janm\phpmvc\Aplication;
 use app\controllers\AuthController;
 use app\controllers\SiteController;
 

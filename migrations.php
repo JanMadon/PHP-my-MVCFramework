@@ -4,7 +4,7 @@
 //
 //exit;
 
-use app\core\Aplication;
+use janm\phpmvc\Aplication;
 
 require_once __DIR__ . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__) ;
