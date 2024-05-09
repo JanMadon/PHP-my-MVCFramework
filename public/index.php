@@ -21,13 +21,14 @@ $config = [
 
 $app = new Aplication(dirname(__DIR__), $config);
 
-//$app->router->get('/', function(){ // closure wywala błąd
-//    return 'hello world /';
-//});
-$app->router->get('/users', function () {
+$app->on(Aplication::EVENT_BEFORE_REQUEST, function (){
+    echo 'before reguest';
+});
+
+$app->router->get('/test', function () {
     return 'hello world users';
 });
-$app->router->get('/books', function () {
+$app->router->get('/test2', function () {
     return 'hello world books';
 });
 
