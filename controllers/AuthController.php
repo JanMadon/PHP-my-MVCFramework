@@ -36,7 +36,7 @@ class AuthController extends Controller
     }
 
 
-    public function register(Request $request): null
+    public function register(Request $request)
     {
         // dd($request->getBody());
         $user = new User();

@@ -29,7 +29,7 @@ class ContactForm extends Model
         ];
     }
 
-    public function send(): true
+    public function send(): bool
     {
         return true;
     }

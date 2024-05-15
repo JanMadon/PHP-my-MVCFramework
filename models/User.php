@@ -29,7 +29,7 @@ class User extends UserModel
         return 'id';
     }
 
-    public function save(): true
+    public function save()
     {
         $this->status = self::STATUS_INACTIVE;
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
